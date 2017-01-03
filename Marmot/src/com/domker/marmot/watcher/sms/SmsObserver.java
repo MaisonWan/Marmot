@@ -7,10 +7,11 @@ import java.util.Arrays;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Handler;
 import android.util.Log;
+
+import com.domker.marmot.watcher.WatcherContentObserver;
 
 /**
  * 短信数据库监听器
@@ -18,15 +19,13 @@ import android.util.Log;
  * @author Maison
  *
  */
-public class SmsObserver extends ContentObserver {
-	private Context mContext = null;
+public class SmsObserver extends WatcherContentObserver {
 	
 	/**
 	 * @param handler
 	 */
 	public SmsObserver(Context context, Handler handler) {
-		super(handler);
-		mContext = context;
+		super(context, handler);
 	}
 
 	@Override
@@ -38,17 +37,14 @@ public class SmsObserver extends ContentObserver {
 	/**
 	 * 从数据库中读取短信内容
 	 */
-	public void updateSmsFromPhone() {
+	private void updateSmsFromPhone() {
 		ContentResolver cr = mContext.getContentResolver();
-//		String[] projection = new String[] { "body" };// "_id", "address",
-//														// "person",, "date",
-//														// "type
 		String where = " date > " + (System.currentTimeMillis() - 10 * 60 * 60 * 1000);
 		Cursor cur = cr.query(SmsWatcher.SMS_INBOX, null, where, null, "date desc");
-		if (null == cur) {
+		if (cur == null) {
 			return;
 		}
-		if (cur.moveToNext()) {
+		while (cur.moveToNext()) {
 			SmsEntity sms = parserSms(cur);
 			// 这里我是要获取自己短信服务号码中的验证码~~
 //			Pattern pattern = Pattern.compile(" [a-zA-Z0-9]{10}");
@@ -87,5 +83,13 @@ public class SmsObserver extends ContentObserver {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.domker.marmot.watcher.WatcherContentObserver#checkChange()
+	 */
+	@Override
+	public void checkChange() {
+		updateSmsFromPhone();
 	}
 }

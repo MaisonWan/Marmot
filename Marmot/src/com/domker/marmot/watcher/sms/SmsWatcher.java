@@ -1,7 +1,9 @@
 package com.domker.marmot.watcher.sms;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.provider.CallLog;
 
 import com.domker.marmot.watcher.AbstractWatcher;
 
@@ -16,8 +18,14 @@ public class SmsWatcher extends AbstractWatcher {
 	 * 短信接收URI
 	 */
 	public static final Uri SMS_INBOX = Uri.parse("content://sms/");
+	/**
+	 * 通话记录
+	 */
+	public static final Uri CALL_LOG = CallLog.Calls.CONTENT_URI;
 	
+	private ContentResolver cr = null;
 	private SmsObserver smsObserver = null;
+	private CallObserver callObserver = null;
 	private SmsHandler mHandler = null;
 	
 	/**
@@ -25,8 +33,10 @@ public class SmsWatcher extends AbstractWatcher {
 	 */
 	public SmsWatcher(Context context) {
 		super(context);
+		cr = mContext.getContentResolver();
 		mHandler = new SmsHandler();
-		smsObserver = new SmsObserver(context, mHandler);  
+		smsObserver = new SmsObserver(context, mHandler);
+		callObserver = new CallObserver(context, mHandler);
 	}
 
 	/*
@@ -37,10 +47,8 @@ public class SmsWatcher extends AbstractWatcher {
 	@Override
 	public void startWatcher() {
 		super.startWatcher();
-//		IntentFilter filter = new IntentFilter();
-//		filter.addAction("android.provider.Telephony.SMS_RECEIVED");
-//		mContext.registerReceiver(receiver, filter);
-		mContext.getContentResolver().registerContentObserver(SMS_INBOX, true, smsObserver);
+		cr.registerContentObserver(SMS_INBOX, true, smsObserver);
+		cr.registerContentObserver(CALL_LOG, true, callObserver);
 	}
 
 	/*
@@ -51,8 +59,8 @@ public class SmsWatcher extends AbstractWatcher {
 	@Override
 	public void stopWatcher() {
 		super.stopWatcher();
-//		mContext.unregisterReceiver(receiver);
-		mContext.getContentResolver().unregisterContentObserver(smsObserver);
+		cr.unregisterContentObserver(smsObserver);
+		cr.unregisterContentObserver(callObserver);
 	}
 
 	/* (non-Javadoc)
@@ -60,7 +68,8 @@ public class SmsWatcher extends AbstractWatcher {
 	 */
 	@Override
 	public void onStartExecute() {
-		smsObserver.updateSmsFromPhone();
+		smsObserver.checkChange();
+		callObserver.checkChange();
 	}
 
 }
