@@ -53,7 +53,7 @@ public class CallObserver extends WatcherContentObserver {
 		List<CallEntity> callList = new ArrayList<CallEntity>();
 		ContentResolver cr = mContext.getContentResolver();
 //		String where = " date > " + (System.currentTimeMillis() - 10 * 60 * 60 * 1000);
-		String sortOrder = CallLog.Calls.DATE + " desc";
+		String sortOrder = CallLog.Calls.DEFAULT_SORT_ORDER;
 		Cursor cursor = cr.query(CallLog.Calls.CONTENT_URI, null, null, null, sortOrder);
 		if (cursor == null || cursor.getCount() <= 0) {
 			return null;
