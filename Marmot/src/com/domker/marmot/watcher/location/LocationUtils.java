@@ -14,16 +14,14 @@ import android.text.TextUtils;
  * 辅助工具类
  */
 public class LocationUtils {
-	public final static String KEY_URL = "URL";
-	public final static String URL_H5LOCATION = "file:///android_asset/location.html";
-
+	
 	/**
 	 * 根据定位结果返回定位信息的字符串
 	 * 
 	 * @param loc
 	 * @return
 	 */
-	public synchronized static String getLocationStr(AMapLocation location) {
+	public synchronized static String getLocationInfo(AMapLocation location) {
 		if (null == location) {
 			return null;
 		}
