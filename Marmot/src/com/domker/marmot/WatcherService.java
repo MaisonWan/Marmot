@@ -27,7 +27,7 @@ public class WatcherService extends Service {
 		watchManager.onStartCommand();
 		return START_STICKY;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see android.app.Service#onBind(android.content.Intent)
 	 */

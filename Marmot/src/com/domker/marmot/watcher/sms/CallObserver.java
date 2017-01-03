@@ -62,6 +62,7 @@ public class CallObserver extends WatcherContentObserver {
 			CallEntity call = parserCall(cursor);
 			callList.add(call);
 		}
+		cursor.close();
 		return callList;
 	}
 	
