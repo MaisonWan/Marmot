@@ -9,8 +9,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
-import android.util.Log;
 
+import com.domker.marmot.log.MLog;
 import com.domker.marmot.watcher.WatcherContentObserver;
 
 /**
@@ -44,6 +44,7 @@ public class SmsObserver extends WatcherContentObserver {
 		if (cur == null) {
 			return;
 		}
+		MLog.i("Begin UpdateSmsFromPhone");
 		while (cur.moveToNext()) {
 			SmsEntity sms = parserSms(cur);
 			// 这里我是要获取自己短信服务号码中的验证码~~
@@ -55,9 +56,10 @@ public class SmsObserver extends WatcherContentObserver {
 //			}
 			// 处理业务
 			if (sms != null) {
-				Log.i("sms", sms.toString());
+				MLog.i("sms", sms.toString());
 			}
 		}
+		MLog.i("End UpdateSmsFromPhone");
 		cur.close();
 	}
 	
@@ -68,7 +70,7 @@ public class SmsObserver extends WatcherContentObserver {
 	 */
 	private SmsEntity parserSms(Cursor c) {
 		try {
-			Log.i("getColumnNames", Arrays.toString(c.getColumnNames()));
+			MLog.i(Arrays.toString(c.getColumnNames()));
 			SmsEntity s = new SmsEntity();
 			s.number = c.getString(c.getColumnIndex("address"));// 发件人地址
 			s.name = c.getString(c.getColumnIndex("person"));   // 发件人，如果发件人在通讯录中则为具体姓名，陌生人为null

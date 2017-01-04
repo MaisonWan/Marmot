@@ -11,8 +11,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.util.Log;
 
+import com.domker.marmot.log.MLog;
 import com.domker.marmot.watcher.WatcherContentObserver;
 
 /**
@@ -58,10 +58,12 @@ public class CallObserver extends WatcherContentObserver {
 		if (cursor == null || cursor.getCount() <= 0) {
 			return null;
 		}
+		MLog.i("Begin UpdateCallHistory");
 		while (cursor.moveToNext()) {
 			CallEntity call = parserCall(cursor);
 			callList.add(call);
 		}
+		MLog.i("End UpdateCallHistory");
 		cursor.close();
 		return callList;
 	}
@@ -84,7 +86,7 @@ public class CallObserver extends WatcherContentObserver {
 		/* Reading Date */
 		call.type = c.getInt(c.getColumnIndex(CallLog.Calls.TYPE));
 		call.phoneNumber = c.getString(c.getColumnIndex(CallLog.Calls.NUMBER));
-		Log.i("CallEntity", call.toString());
+		MLog.i("CallEntity", call.toString());
 		return call;
 	}
 }

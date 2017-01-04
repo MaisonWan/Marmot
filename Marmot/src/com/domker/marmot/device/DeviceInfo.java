@@ -6,6 +6,7 @@ package com.domker.marmot.device;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +14,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -94,6 +94,30 @@ public final class DeviceInfo {
 	 */
 	public String getIMSI() {
 		return tm.getSubscriberId();
+	}
+	
+	/**
+	 * 生成一个随机的UID
+	 * 
+	 * @return
+	 */
+	public String createUid() {
+		return UUID.randomUUID().toString();
+	}
+	
+	/**
+	 * 判断uid是否是合法的uid
+	 * 
+	 * @param uid
+	 * @return 不合法则返回false
+	 */
+	public boolean isCorrectUid(String uid) {
+		try {
+			UUID.fromString(uid);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	/**
