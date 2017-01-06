@@ -3,5 +3,6 @@
 
     <string name="app_name">Marmot</string>
     <string name="hello_world">Hello world!</string>
+    <string name="watcher_process">com.domker.marmot.wathcher</string>
 
 </resources>

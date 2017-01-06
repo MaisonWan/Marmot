@@ -1,11 +1,13 @@
 package com.domker.marmot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.domker.marmot.core.Watcher;
 
 public class MainActivity extends Activity {
 
@@ -17,9 +19,9 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, WatcherService.class);
-				startService(intent);
-				Log.i("Main", "WatcherService Start");
+				final Context context = MainActivity.this;
+				Intent intent = Watcher.createIntent(context, WatcherService.class);
+				Watcher.startService(context, intent);
 			}
 		});
 	}

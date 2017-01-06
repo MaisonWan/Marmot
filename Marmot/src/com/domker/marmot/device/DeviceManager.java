@@ -7,6 +7,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.domker.marmot.config.ConfigManager;
+import com.domker.marmot.log.MLog;
 
 /**
  * 设备管理器，初始化一些标识等
@@ -46,6 +47,7 @@ public final class DeviceManager {
 			mConfigManager.setUid(uid);
 			return false;
 		}
+		MLog.i("uid = " + uid);
 		return true;
 	}
 }
