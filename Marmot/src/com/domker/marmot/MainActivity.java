@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.domker.marmot.core.Watcher;
+import com.umeng.message.PushAgent;
 
 public class MainActivity extends Activity {
 
@@ -24,5 +25,6 @@ public class MainActivity extends Activity {
 				Watcher.startService(context, intent);
 			}
 		});
+		PushAgent.getInstance(this).onAppStart();
 	}
 }

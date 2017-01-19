@@ -3,9 +3,10 @@
  */
 package com.domker.marmot;
 
-import com.domker.marmot.config.ConfigManager;
-
 import android.app.Application;
+
+import com.domker.marmot.config.ConfigManager;
+import com.domker.marmot.push.PushManager;
 
 /**
  * 全局的Application
@@ -18,6 +19,7 @@ public class WatcherApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		PushManager.getInstance(this).register();
 		ConfigManager.init(this);
 	}
 	

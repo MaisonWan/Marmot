@@ -6,6 +6,7 @@ import android.os.IBinder;
 
 import com.domker.marmot.device.DeviceManager;
 import com.domker.marmot.manager.WatcherManager;
+import com.domker.marmot.push.PushManager;
 
 /**
  * 监控服务
@@ -20,6 +21,7 @@ public class WatcherService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		PushManager.getInstance(getApplicationContext()).register();
 		deviceManager = new DeviceManager(this);
 		watchManager = new WatcherManager(this);
 		watchManager.onStart();
