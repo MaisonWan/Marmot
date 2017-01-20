@@ -19,7 +19,7 @@ public class WatcherApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		PushManager.getInstance(this).register();
+		PushManager.getInstance(this);
 		ConfigManager.init(this);
 	}
 	

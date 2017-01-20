@@ -3,10 +3,10 @@
  */
 package com.domker.marmot.push;
 
+
 import android.content.Context;
 
 import com.domker.marmot.log.MLog;
-import com.umeng.message.IUmengCallback;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 
@@ -17,6 +17,9 @@ import com.umeng.message.PushAgent;
  * @date 2017年1月17日 上午11:38:24
  */
 public final class PushManager {
+	public static final int NOTIFICATION_PLAY_SDK_ENABLE = 1;
+	
+	private Context mContext = null;
 	private PushAgent mPushAgent = null;
 	private static PushManager mPushManager = null;
 	
@@ -28,26 +31,18 @@ public final class PushManager {
 	}
 
 	private PushManager(Context context) {
+		mContext = context;
 		mPushAgent = PushAgent.getInstance(context);
-		mPushAgent.setDebugMode(false);
-		mPushAgent.setPushIntentServiceClass(PushIntentService.class);
+		mPushAgent.setDebugMode(true);
+		register();
 	}
 	
-	public void register() {
-		mPushAgent.setPushCheck(true);
-		mPushAgent.setCallback(new IUmengCallback() {
-			
-			@Override
-			public void onSuccess() {
-				MLog.i("onSuccess: " + mPushAgent.getRegistrationId());
-			}
-			
-			@Override
-			public void onFailure(String arg0, String arg1) {
-				MLog.i("onFailure: " + arg0 + "-" + arg1);
-			}
-		});
-		
+	/**
+	 * 注册申请服务器，返回deviceToken
+	 * 
+	 * @return
+	 */
+	public PushManager register() {
 		mPushAgent.register(new IUmengRegisterCallback() {
 			
 			@Override
@@ -60,8 +55,16 @@ public final class PushManager {
 				MLog.i("onFailure: " + arg0 + "-" + arg1);
 			}
 		});
-		for (int i = 0; i < 100; i++) {
-			MLog.i(i + " getRegistrationId: " + mPushAgent.getRegistrationId());
-		}
+		return this;
+	}
+	
+	/**
+	 * 自定义push服务接管接收推送消息
+	 * 
+	 * @return
+	 */
+	public PushManager pushService() {
+		mPushAgent.setPushIntentServiceClass(PushIntentService.class);
+		return this;
 	}
 }

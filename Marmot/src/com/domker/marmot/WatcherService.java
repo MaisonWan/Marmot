@@ -21,7 +21,7 @@ public class WatcherService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		PushManager.getInstance(getApplicationContext()).register();
+		PushManager.getInstance(getApplicationContext()).pushService();
 		deviceManager = new DeviceManager(this);
 		watchManager = new WatcherManager(this);
 		watchManager.onStart();

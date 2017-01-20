@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager.WakeLock;
-import android.util.Log;
 
 import com.domker.marmot.core.AsyncHandler;
 import com.domker.marmot.core.CpuWakeLock;

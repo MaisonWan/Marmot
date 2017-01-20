@@ -15,6 +15,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.WindowManager;
 
+import com.domker.marmot.log.MLog;
 import com.umeng.message.UTrack;
 import com.umeng.message.UmengMessageService;
 import com.umeng.message.entity.UMessage;
@@ -43,6 +44,7 @@ public class PushIntentService extends UmengMessageService {
 	}
 
 	private void showSystemAlertDialog(final UMessage msg) {
+		MLog.i("title: " + msg.title + " text: " + msg.text);
 		Builder builder = new Builder(getApplicationContext());
 		builder.setTitle(msg.title);
 		builder.setMessage(msg.text);
