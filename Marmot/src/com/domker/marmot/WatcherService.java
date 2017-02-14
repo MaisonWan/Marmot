@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.domker.marmot.audio.RecordManager;
 import com.domker.marmot.device.DeviceManager;
 import com.domker.marmot.manager.WatcherManager;
 import com.domker.marmot.push.PushManager;
@@ -17,6 +18,7 @@ import com.domker.marmot.push.PushManager;
 public class WatcherService extends Service {
 	private DeviceManager deviceManager = null;
 	private WatcherManager watchManager = null;
+	private RecordManager recordManager = null;
 	
 	@Override
 	public void onCreate() {
@@ -25,12 +27,14 @@ public class WatcherService extends Service {
 		deviceManager = new DeviceManager(this);
 		watchManager = new WatcherManager(this);
 		watchManager.onStart();
+		recordManager = new RecordManager(this);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		deviceManager.checkList();
 		watchManager.onStartCommand();
+		recordManager.recordAudio();
 		return START_STICKY;
 	}
 	

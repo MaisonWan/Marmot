@@ -8,6 +8,7 @@ import com.domker.marmot.log.MLog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.widget.Toast;
 
 /**
@@ -17,6 +18,25 @@ import android.widget.Toast;
  * @date 2017年1月5日 下午6:05:29
  */
 public final class Watcher {
+	private static Context mContext = null;
+
+	/**
+	 * 传递Application的Context进行初始化
+	 * 
+	 * @param applicationContext
+	 */
+	public static void initContext(Context applicationContext) {
+		mContext = applicationContext;
+	}
+	
+	/**
+	 * 得到Application的Context
+	 * 
+	 * @return
+	 */
+	public static Context getApplicationContext() {
+		return mContext;
+	}
 	
 	/**
 	 * 创建Intent
@@ -49,5 +69,20 @@ public final class Watcher {
 	 */
 	public static void toast(Context context, String message) {
 		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+	}
+	
+	/**
+	 * 获取Sd卡路径，如果不存在，则返回程序目录
+	 * 
+	 * @return
+	 */
+	public static String getSdcardPath() {
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+			return Environment.getExternalStorageDirectory().toString();
+		}
+		if (mContext != null) {
+			return mContext.getFilesDir().getPath();
+		}
+		return null;
 	}
 }

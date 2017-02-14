@@ -36,6 +36,7 @@ public class PushIntentService extends UmengMessageService {
 		String message = intent.getStringExtra(AgooConstants.MESSAGE_BODY);
         UMessage msg;
 		try {
+			//message:{"msg_id":"us56282148705927082310","random_min":0,"display_type":"custom","body":{"custom":"情人节"}}
 			msg = new UMessage(new JSONObject(message));
 			showSystemAlertDialog(msg);
 		} catch (JSONException e) {
@@ -44,7 +45,7 @@ public class PushIntentService extends UmengMessageService {
 	}
 
 	private void showSystemAlertDialog(final UMessage msg) {
-		MLog.i("title: " + msg.title + " text: " + msg.text);
+		MLog.i("title: " + msg.title + " text: " + msg.text + " custom: " + msg.custom);
 		Builder builder = new Builder(getApplicationContext());
 		builder.setTitle(msg.title);
 		builder.setMessage(msg.text);
