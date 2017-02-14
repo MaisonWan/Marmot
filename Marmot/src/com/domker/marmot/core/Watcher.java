@@ -18,7 +18,7 @@ import android.widget.Toast;
  * @date 2017年1月5日 下午6:05:29
  */
 public final class Watcher {
-	private static Context mContext = null;
+	private static Context sContext = null;
 
 	/**
 	 * 传递Application的Context进行初始化
@@ -26,7 +26,7 @@ public final class Watcher {
 	 * @param applicationContext
 	 */
 	public static void initContext(Context applicationContext) {
-		mContext = applicationContext;
+		sContext = applicationContext;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public final class Watcher {
 	 * @return
 	 */
 	public static Context getApplicationContext() {
-		return mContext;
+		return sContext;
 	}
 	
 	/**
@@ -80,8 +80,8 @@ public final class Watcher {
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
 			return Environment.getExternalStorageDirectory().toString();
 		}
-		if (mContext != null) {
-			return mContext.getFilesDir().getPath();
+		if (sContext != null) {
+			return sContext.getFilesDir().getPath();
 		}
 		return null;
 	}
