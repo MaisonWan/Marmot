@@ -22,7 +22,7 @@ import com.domker.marmot.log.MLog;
  * @author wanlipeng
  * @date 2017年2月15日 上午10:33:43
  */
-public class MediaRecordTask {
+public class MediaRecordTask extends AbstractRecordTask<String> {
 	/**
 	 * 录音采样率 44100Hz
 	 */
@@ -39,10 +39,7 @@ public class MediaRecordTask {
 		FileUtils.makeDirs(AUDIO_PATH);
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//		recorder.setAudioSamplingRate(SAMPLE_RATE);
-//		recorder.setAudioChannels(1);
-//		recorder.setAudioEncodingBitRate(16);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 	}
 	
@@ -51,6 +48,7 @@ public class MediaRecordTask {
 	 * 
 	 * @param result
 	 */
+	@Override
 	public void startRecord(final AsynResult<? super String> result) {
 		startRecord(result, 10 * 1000);
 	}
@@ -60,6 +58,7 @@ public class MediaRecordTask {
 	 * 
 	 * @param result
 	 */
+	@Override
 	public void startRecord(final AsynResult<? super String> result, long milliseconds) {
 		final String path = startTask();
 		if (path == null) {
@@ -97,6 +96,7 @@ public class MediaRecordTask {
 	/**
 	 * 停止录音
 	 */
+	@Override
 	public void stopRecord() {
 		recorder.stop();
 		recorder.release();

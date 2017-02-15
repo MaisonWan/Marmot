@@ -25,7 +25,7 @@ public class RecordManager {
 	 * 录制音频
 	 */
 	public void recordAudio() {
-		final AbstractRecordTask<String> task = new AudioRecordTask();
+		final AbstractRecordTask<String> task = new MediaRecordTask();
 		task.startRecord(new AsynResult<String>() {
 
 			@Override
