@@ -3,10 +3,10 @@
  */
 package com.domker.marmot.audio;
 
-import com.domker.marmot.core.AsyncHandler;
-import com.domker.marmot.log.MLog;
-
 import android.content.Context;
+
+import com.domker.marmot.core.AsynResult;
+import com.domker.marmot.log.MLog;
 
 /**
  * 录制管理器
@@ -25,20 +25,15 @@ public class RecordManager {
 	 * 录制音频
 	 */
 	public void recordAudio() {
-		final RecordTask task = new RecordTask();
-		task.execute(0);
-		AsyncHandler.post(new Runnable() {
-			
+		final AbstractRecordTask<String> task = new AudioRecordTask();
+		task.startRecord(new AsynResult<String>() {
+
 			@Override
-			public void run() {
-				try {
-					task.setRecordState(false);
-					String path = task.get();
-					MLog.i("Record Path = " + path);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			public void onResult(boolean succeed, String t) {
+				MLog.i("Record succeed = " + succeed + " Path = " + t);
 			}
-		}, 10000);
+		});
+//		MediaRecordTask task = new MediaRecordTask();
+//		task.startRecord();
 	}
 }
