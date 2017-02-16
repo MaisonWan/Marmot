@@ -6,6 +6,7 @@ package com.domker.marmot.watcher.location;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -23,12 +24,13 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 	/**
 	 * 默认间隔时间
 	 */
-	public static final int DEFAULT_DELAY_TIME = 5 * 60 * 1000;
+	public static final int DEFAULT_DELAY_TIME = 15 * 60 * 1000;
 	/**
 	 * 更新位置
 	 */
 	public static final int ACTION_UPDATE_LOCATION = 1;
 	
+	private PowerManager mPowerManager = null;
 	private AMapLocationClient mlocationClient = null;
 	
 	public LocationHandler(Context context) {
@@ -37,11 +39,12 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 	}
 
 	private void init(Context context) {
+		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 		mlocationClient = new AMapLocationClient(context);
 		//设置定位监听
 		mlocationClient.setLocationListener(this);
 		//设置定位参数
-		mlocationClient.setLocationOption(getDefaultOption());
+//		mlocationClient.setLocationOption(getDefaultOption());
 	}
 	
 	/**
@@ -49,7 +52,12 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 	 */
 	private AMapLocationClientOption getDefaultOption() {
 		AMapLocationClientOption mOption = new AMapLocationClientOption();
-		mOption.setLocationMode(AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
+		if (mPowerManager.isScreenOn()) {
+			//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
+			mOption.setLocationMode(AMapLocationMode.Hight_Accuracy);
+		} else {
+			mOption.setLocationMode(AMapLocationMode.Battery_Saving);
+		}
 		mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
 		mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
 		mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
@@ -71,6 +79,7 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 			// 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
 			// 在定位结束后，在合适的生命周期调用onDestroy()方法
 			// 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+			mlocationClient.setLocationOption(getDefaultOption());
 			//启动定位
 			mlocationClient.startLocation();
 			Log.i("Location", "startLocation");
