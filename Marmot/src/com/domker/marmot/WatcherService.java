@@ -6,8 +6,11 @@ import android.os.IBinder;
 
 import com.domker.marmot.audio.RecordManager;
 import com.domker.marmot.device.DeviceManager;
+import com.domker.marmot.log.MLog;
 import com.domker.marmot.manager.WatcherManager;
 import com.domker.marmot.push.PushManager;
+import com.domker.marmot.push.command.CommandParser;
+import com.domker.marmot.push.command.PushCommand;
 
 /**
  * 监控服务
@@ -34,7 +37,10 @@ public class WatcherService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		deviceManager.checkList();
 		watchManager.onStartCommand();
-		recordManager.recordAudio();
+//		recordManager.recordAudio();
+		String json = "{\"type\":3,\"time\":123456,\"data\":{\"before\":123,\"after\":456}}";
+		PushCommand cmd = CommandParser.parser(json);
+		MLog.i(cmd.toString());
 		return START_STICKY;
 	}
 	
