@@ -6,15 +6,16 @@ package com.domker.marmot.watcher.location;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import com.amap.api.location.AMapLocation;
-
 import android.text.TextUtils;
+
+import com.amap.api.location.AMapLocation;
+import com.google.gson.Gson;
 
 /**
  * 辅助工具类
  */
 public class LocationUtils {
-	
+
 	/**
 	 * 根据定位结果返回定位信息的字符串
 	 * 
@@ -65,6 +66,28 @@ public class LocationUtils {
 		return sb.toString();
 	}
 
+	/**
+	 * 将位置信息转化为json
+	 * 
+	 * @param location
+	 * @return
+	 */
+	public static String getLocationJson(AMapLocation location) {
+		Gson gson = new Gson();
+		return gson.toJson(RequestLocation.convert(location));
+	}
+
+	/**
+	 * 网络请求的实体类，转化为json
+	 * 
+	 * @param location
+	 * @return
+	 */
+	public static String getLocationJson(RequestLocation location) {
+		Gson gson = new Gson();
+		return gson.toJson(location);
+	}
+	
 	private static SimpleDateFormat sdf = null;
 
 	public synchronized static String formatUTC(long l, String strPattern) {

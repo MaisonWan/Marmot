@@ -3,6 +3,7 @@
  */
 package com.domker.marmot.net;
 
+import com.google.gson.annotations.SerializedName;
 
 /**
  * 请求结果的返回值
@@ -14,23 +15,15 @@ public class ResponseResult {
 	/**
 	 * 返回0的时候是正常，没有错误, 大于0有错误
 	 */
-	private int errorCode = 0;
-	private String data = null;
+	@SerializedName("ErrorCode")
+	public int errorCode = 0;
+	
+	@SerializedName("Data")
+	public String data = null;
 
-	public int getErrorCode() {
-		return errorCode;
-	}
-
-	public void setErrorCode(int errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
+	@Override
+	public String toString() {
+		return "[errorCode=" + errorCode + ", data=" + data + "]";
 	}
 
 }

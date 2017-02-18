@@ -5,9 +5,9 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry exported="true" kind="lib" path="D:/Code/Android/AMap/AMap_Location_V3.2.1_20161228.jar">
+	<classpathentry exported="true" kind="lib" path="E:/Projects/Component/AMap/AMap_Location_V3.2.1_20161228.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="file:/D:/Code/Android/AMap/AMap_Android_API_Location_Doc/"/>
+			<attribute name="javadoc_location" value="file:/E:/Projects/Component/AMap/AMap_Android_API_Location_Doc/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin/classes"/>
