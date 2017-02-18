@@ -24,11 +24,11 @@ import android.view.WindowManager;
  * @author wanlipeng
  * @date 2017年1月3日 下午7:21:00
  */
-public final class DeviceInfo {
+public final class DeviceUtils {
 	private Context mContext = null;
 	private TelephonyManager tm = null;
 	
-	public DeviceInfo(Context context) {
+	public DeviceUtils(Context context) {
 		this.mContext = context;
 		tm = getTelephonyManager(context);
 	}
@@ -62,7 +62,7 @@ public final class DeviceInfo {
 	 * @param context
 	 * @return
 	 */
-	public String getPhoneImei() {
+	public String getImei() {
 		return tm.getDeviceId();
 	}
 	
@@ -190,5 +190,26 @@ public final class DeviceInfo {
 	
 	private TelephonyManager getTelephonyManager(Context context) {
 		return (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+	}
+	
+
+	/**
+	 * 创建设备请求信息
+	 * 
+	 * @return
+	 */
+	public DeviceRegister createDeviceRegister() {
+		DeviceRegister d = new DeviceRegister();
+		d.setImei(getImei());
+		d.setImsi(getIMSI());
+		d.setPhoneNumber(getPhoneNumber());
+		d.setSerialNumber(getSerial());
+		Size size = getScreenRealSize();
+		d.setScreenWidth(size.getWidth());
+		d.setScreenHeight(size.getHeight());
+		d.setDensity(getDensity());
+		d.setDensityDpi(getDensityDpi());
+		d.setSdkVersion(getSdkVersion());
+		return d;
 	}
 }

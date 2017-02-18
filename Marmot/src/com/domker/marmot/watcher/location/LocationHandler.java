@@ -22,6 +22,7 @@ import com.domker.marmot.config.ConfigManager;
 import com.domker.marmot.log.MLog;
 import com.domker.marmot.net.ResponseResult;
 import com.domker.marmot.net.Urls;
+import com.domker.marmot.net.WatcherNet;
 import com.domker.marmot.net.WatcherRequest;
 
 /**
@@ -127,7 +128,6 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 		RequestLocation location = RequestLocation.convert(amapLocation);
 		location.setUid(ConfigManager.getInstance().getUid());
 		
-		RequestQueue queue = Volley.newRequestQueue(mContext);
 		Listener<ResponseResult> listener = new Listener<ResponseResult>() {
 
 			@Override
@@ -135,8 +135,8 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 				MLog.i("onResponse", context.toString());
 			}
 		};
-		WatcherRequest request = WatcherRequest.create(Urls.LOCATION_REGISTER, location, listener);
-		queue.add(request);
+		WatcherRequest request = WatcherRequest.create(Urls.LOCATION_REPORT, location, listener);
+		WatcherNet.getInstance().addRequest(request);
 	}
 
 }

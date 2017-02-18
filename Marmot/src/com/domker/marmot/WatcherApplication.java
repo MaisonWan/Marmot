@@ -7,6 +7,7 @@ import android.app.Application;
 
 import com.domker.marmot.config.ConfigManager;
 import com.domker.marmot.core.Watcher;
+import com.domker.marmot.net.WatcherNet;
 import com.domker.marmot.push.PushManager;
 
 /**
@@ -21,6 +22,7 @@ public class WatcherApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		Watcher.initContext(this);
+		WatcherNet.init(this);
 		PushManager.getInstance(this);
 		ConfigManager.init(this);
 	}
