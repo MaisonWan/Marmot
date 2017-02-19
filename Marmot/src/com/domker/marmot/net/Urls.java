@@ -28,4 +28,9 @@ public final class Urls {
 	 * 上报短信
 	 */
 	public static final String SMS_REPORT = HOST + API_VERSION + "sms/report";
+	
+	/**
+	 * 上报通话记录
+	 */
+	public static final String CALL_REPORT = HOST + API_VERSION + "call/report";
 }

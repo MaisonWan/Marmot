@@ -65,7 +65,7 @@ public final class ConfigManager implements ConfigConst {
 	 * @return
 	 */
 	public long getSmsTime() {
-		return mSharedPref.getLong(SMS_TIME, SMS_TIME_DEFAULT);
+		return mSharedPref.getLong(SMS_TIME_LINE, SMS_TIME_LINE_DEFAULT);
 	}
 	
 	/**
@@ -73,7 +73,24 @@ public final class ConfigManager implements ConfigConst {
 	 * @param smsTime
 	 */
 	public void setSmsTime(long smsTime) {
-		mEditor.putLong(SMS_TIME, smsTime);
+		mEditor.putLong(SMS_TIME_LINE, smsTime);
+		mEditor.commit();
+	}
+	
+	/**
+	 * 获取通话上传的时间
+	 * @return
+	 */
+	public long getCallTimeline() {
+		return mSharedPref.getLong(CALL_TIME_LINE, CALL_TIME_LINE_DEFAULT);
+	}
+	
+	/**
+	 * 设置通话时间点，保证这个时间点之前的通话都上传完毕
+	 * @param smsTime
+	 */
+	public void setCallTimeline(long callTime) {
+		mEditor.putLong(CALL_TIME_LINE, callTime);
 		mEditor.commit();
 	}
 }

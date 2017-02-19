@@ -10,7 +10,7 @@ package com.domker.marmot.watcher.sms;
  * @date 2017年1月3日 下午5:20:58
  */
 public class CallEntity {
-
+	public String uid;
 	/**
 	 * 联系人名字
 	 */
