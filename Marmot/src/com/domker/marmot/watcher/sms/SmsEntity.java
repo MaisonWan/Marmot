@@ -10,6 +10,7 @@ package com.domker.marmot.watcher.sms;
  *
  */
 public class SmsEntity {
+	public String uid = null;
 	/**
 	 * 发件人地址，手机号
 	 */
@@ -25,19 +26,19 @@ public class SmsEntity {
 	/**
 	 * 日期，long型，如1346988516，可以对日期显示格式进行设置
 	 */
-	public String date;
+	public long date;
 	/**
 	 * protocol：协议0 SMS_RPOTO短信，1 MMS_PROTO彩信
 	 */
-	public String protocol;
+	public int protocol;
 	/**
 	 * 是否阅读0未读，1已读
 	 */
-	public String read;
+	public int read;
 	/**
 	 * type：短信类型1是接收到的，2是已发出
 	 */
-	public String type;
+	public int type;
 	/**
 	 * 短信中心号码
 	 */

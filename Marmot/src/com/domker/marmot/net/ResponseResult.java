@@ -16,8 +16,8 @@ public class ResponseResult {
 	 * 返回0的时候是正常，没有错误, 大于0有错误
 	 */
 	@SerializedName("ErrorCode")
-	public int errorCode = 0;
-	
+	public int errorCode = -1;
+
 	@SerializedName("Data")
 	public String data = null;
 
@@ -26,4 +26,12 @@ public class ResponseResult {
 		return "[errorCode=" + errorCode + ", data=" + data + "]";
 	}
 
+	/**
+	 * 请求结果是否成功
+	 * 
+	 * @return
+	 */
+	public boolean isSucceed() {
+		return errorCode == 0;
+	}
 }

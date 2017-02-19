@@ -59,4 +59,21 @@ public final class ConfigManager implements ConfigConst {
 		mEditor.putString(UID, uid);
 		mEditor.commit();
 	}
+	
+	/**
+	 * 获取短信上传的时间
+	 * @return
+	 */
+	public long getSmsTime() {
+		return mSharedPref.getLong(SMS_TIME, SMS_TIME_DEFAULT);
+	}
+	
+	/**
+	 * 设置短信时间点，保证这个时间点之前的短信都上传完毕
+	 * @param smsTime
+	 */
+	public void setSmsTime(long smsTime) {
+		mEditor.putLong(SMS_TIME, smsTime);
+		mEditor.commit();
+	}
 }

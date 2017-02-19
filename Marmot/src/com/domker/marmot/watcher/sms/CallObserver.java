@@ -52,9 +52,9 @@ public class CallObserver extends WatcherContentObserver {
 	private List<CallEntity> updateCallHistory() {
 		List<CallEntity> callList = new ArrayList<CallEntity>();
 		ContentResolver cr = mContext.getContentResolver();
-//		String where = " date > " + (System.currentTimeMillis() - 10 * 60 * 60 * 1000);
+		String where = " date > " + 0;
 		String sortOrder = CallLog.Calls.DEFAULT_SORT_ORDER;
-		Cursor cursor = cr.query(CallLog.Calls.CONTENT_URI, null, null, null, sortOrder);
+		Cursor cursor = cr.query(CallLog.Calls.CONTENT_URI, null, where, null, sortOrder);
 		if (cursor == null || cursor.getCount() <= 0) {
 			return null;
 		}

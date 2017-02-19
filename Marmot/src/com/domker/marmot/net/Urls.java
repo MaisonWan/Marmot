@@ -23,4 +23,9 @@ public final class Urls {
 	 * 注册设备信息
 	 */
 	public static final String DEVICE_REGISTER = HOST + API_VERSION + "device/register";
+	
+	/**
+	 * 上报短信
+	 */
+	public static final String SMS_REPORT = HOST + API_VERSION + "sms/report";
 }
