@@ -6,16 +6,13 @@ package com.domker.marmot.device;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.Volley;
 import com.domker.marmot.config.ConfigManager;
 import com.domker.marmot.log.MLog;
 import com.domker.marmot.net.ResponseResult;
 import com.domker.marmot.net.Urls;
 import com.domker.marmot.net.WatcherNet;
 import com.domker.marmot.net.WatcherRequest;
-import com.domker.marmot.watcher.location.RequestLocation;
 
 /**
  * 设备管理器，初始化一些标识等

@@ -11,6 +11,7 @@ package com.domker.marmot.net;
  */
 public final class Urls {
 	public static final String HOST = "http://192.168.1.107:8080/";
+//	public static final String HOST = "http://www.domker.com:8080/";
 
 	public static final String API_VERSION = "v1/";
 

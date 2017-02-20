@@ -21,6 +21,15 @@ public class DeviceRegister {
 	private int densityDpi;
 	private int sdkVersion;
 
+	// os build
+	private String cpuABI;
+	private String model;
+	private String versionRelease;
+	private String brand;
+	private String board;
+	private String manufacturer;
+	private String user;
+
 	public String getUid() {
 		return uid;
 	}
@@ -99,6 +108,62 @@ public class DeviceRegister {
 
 	public void setSdkVersion(int sdkVersion) {
 		this.sdkVersion = sdkVersion;
+	}
+
+	public String getCpuABI() {
+		return cpuABI;
+	}
+
+	public void setCpuABI(String cpuABI) {
+		this.cpuABI = cpuABI;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getVersionRelease() {
+		return versionRelease;
+	}
+
+	public void setVersionRelease(String versionRelease) {
+		this.versionRelease = versionRelease;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getBoard() {
+		return board;
+	}
+
+	public void setBoard(String board) {
+		this.board = board;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 }

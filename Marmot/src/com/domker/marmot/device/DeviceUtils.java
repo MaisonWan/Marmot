@@ -210,6 +210,13 @@ public final class DeviceUtils {
 		d.setDensity(getDensity());
 		d.setDensityDpi(getDensityDpi());
 		d.setSdkVersion(getSdkVersion());
+		d.setCpuABI(Build.CPU_ABI);
+		d.setModel(Build.MODEL);
+		d.setVersionRelease(Build.VERSION.RELEASE);
+		d.setBrand(Build.BRAND);
+		d.setBoard(Build.BOARD);
+		d.setManufacturer(Build.MANUFACTURER);
+		d.setUser(Build.USER);
 		return d;
 	}
 }
