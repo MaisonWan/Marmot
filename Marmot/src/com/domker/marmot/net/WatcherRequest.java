@@ -25,7 +25,7 @@ public class WatcherRequest extends JsonRequest<ResponseResult> {
 
 		@Override
 		public void onErrorResponse(VolleyError e) {
-			MLog.i("onErrorResponse: " + e.getMessage());
+			MLog.i("onErrorResponse: " + e.getLocalizedMessage());
 		}
 	};
 
