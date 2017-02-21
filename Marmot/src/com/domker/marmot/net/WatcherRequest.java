@@ -21,11 +21,12 @@ import com.google.gson.Gson;
  */
 public class WatcherRequest extends JsonRequest<ResponseResult> {
 	private static Gson gson = new Gson();
+	private static String sRequestUrl = null;
 	private static ErrorListener mErrorListener = new ErrorListener() {
 
 		@Override
 		public void onErrorResponse(VolleyError e) {
-			MLog.i("onErrorResponse: " + e.getLocalizedMessage());
+			MLog.i(sRequestUrl + " onErrorResponse: " + e.getLocalizedMessage());
 		}
 	};
 
@@ -39,6 +40,7 @@ public class WatcherRequest extends JsonRequest<ResponseResult> {
 	public WatcherRequest(int method, String url, String requestBody,
 			Listener<ResponseResult> listener) {
 		super(method, url, requestBody, listener, mErrorListener);
+		sRequestUrl = url;
 	}
 
 	/**
@@ -49,6 +51,7 @@ public class WatcherRequest extends JsonRequest<ResponseResult> {
 	public WatcherRequest(String url, String requestBody,
 			Listener<ResponseResult> listener) {
 		super(Request.Method.POST, url, requestBody, listener, mErrorListener);
+		sRequestUrl = url;
 	}
 
 	/**

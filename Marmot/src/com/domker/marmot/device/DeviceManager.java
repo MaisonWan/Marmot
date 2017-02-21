@@ -51,7 +51,7 @@ public final class DeviceManager {
 		if (TextUtils.isEmpty(uid) || !mDeviceInfo.isCorrectUid(uid)) {
 			uid = mDeviceInfo.createUid();
 			mConfigManager.setUid(uid);
-			return false;
+			return mDeviceInfo.isCorrectUid(uid);
 		}
 		MLog.i("uid = " + uid);
 		return true;

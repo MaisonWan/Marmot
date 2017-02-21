@@ -77,7 +77,6 @@ public class SmsObserver extends WatcherContentObserver {
 	 */
 	private SmsEntity parserSms(Cursor c) {
 		try {
-			MLog.i(Arrays.toString(c.getColumnNames()));
 			SmsEntity s = new SmsEntity();
 			s.number = c.getString(c.getColumnIndex("address"));// 发件人地址
 			s.name = c.getString(c.getColumnIndex("person"));   // 发件人，如果发件人在通讯录中则为具体姓名，陌生人为null
