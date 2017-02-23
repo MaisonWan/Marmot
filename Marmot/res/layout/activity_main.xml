@@ -25,5 +25,14 @@
          android:layout_below="@+id/buttonStartService"
          android:layout_marginTop="20dp"
          android:text="App信息" />
+     
+     <Button
+         android:id="@+id/buttonProcessInfo"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/buttonStartService"
+         android:layout_below="@+id/buttonAppInfo"
+         android:layout_marginTop="20dp"
+         android:text="进程信息" />
 	
 </RelativeLayout>

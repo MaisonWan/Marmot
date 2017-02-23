@@ -32,7 +32,6 @@ public class LocationWatcher extends AbstractWatcher {
 	@Override
 	public void startWatcher() {
 		super.startWatcher();
-		onStartExecute();
 	}
 
 	/* (non-Javadoc)
