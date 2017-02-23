@@ -31,7 +31,6 @@ public class WatcherService extends Service {
 		watchManager = new WatcherManager(this);
 		watchManager.onStart();
 		recordManager = new RecordManager(this);
-		startForeground();
 	}
 
 	@Override
@@ -42,6 +41,7 @@ public class WatcherService extends Service {
 //		String json = "{\"type\":3,\"time\":123456,\"data\":{\"before\":123,\"after\":456}}";
 //		PushCommand cmd = CommandParser.parser(json);
 //		MLog.i(cmd.toString());
+		startForeground();
 		return START_STICKY;
 	}
 	
@@ -75,6 +75,7 @@ public class WatcherService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		watchManager.onStop();
+		stopForeground(true);
 	}
 	
 }

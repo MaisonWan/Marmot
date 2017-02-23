@@ -92,13 +92,16 @@
             android:name="com.domker.marmot.WatcherService"
             android:exported="false"
             android:process="@string/watcher_process" >
+            <intent-filter android:priority="1000" >
+            </intent-filter>
         </service>
 
         <receiver
             android:name="BootCompletedReceiver"
             android:process="@string/watcher_process" >
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 
