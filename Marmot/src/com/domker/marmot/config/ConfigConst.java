@@ -21,4 +21,7 @@ public interface ConfigConst {
 	
 	public static final String LOCATION_TIME_LINE = "location_time_line";
 	public static final long LOCATION_TIME_LINE_DEFAULT = 0;	
+	
+	public static final String DEVICE_TIME_LINE = "device_time_line";
+	public static final long DEVICE_TIME_LINE_DEFAULT = 0;	
 }

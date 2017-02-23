@@ -97,8 +97,7 @@
         </service>
 
         <receiver
-            android:name="BootCompletedReceiver"
-            android:process="@string/watcher_process" >
+            android:name="BootCompletedReceiver">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />

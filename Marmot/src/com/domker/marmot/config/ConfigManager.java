@@ -56,8 +56,7 @@ public final class ConfigManager implements ConfigConst {
 	 * @param uid
 	 */
 	public void setUid(String uid) {
-		mEditor.putString(UID, uid);
-		mEditor.commit();
+		setValue(UID, uid);
 	}
 	
 	/**
@@ -73,8 +72,7 @@ public final class ConfigManager implements ConfigConst {
 	 * @param smsTime
 	 */
 	public void setSmsTime(long smsTime) {
-		mEditor.putLong(SMS_TIME_LINE, smsTime);
-		mEditor.commit();
+		setValue(SMS_TIME_LINE, smsTime);
 	}
 	
 	/**
@@ -90,8 +88,7 @@ public final class ConfigManager implements ConfigConst {
 	 * @param smsTime
 	 */
 	public void setCallTimeline(long callTime) {
-		mEditor.putLong(CALL_TIME_LINE, callTime);
-		mEditor.commit();
+		setValue(CALL_TIME_LINE, callTime);
 	}
 	
 	/**
@@ -108,7 +105,33 @@ public final class ConfigManager implements ConfigConst {
 	 * @param time
 	 */
 	public void setLocationTime(long time) {
-		mEditor.putLong(LOCATION_TIME_LINE, time);
+		setValue(LOCATION_TIME_LINE, time);
+	}
+	
+	/**
+	 * 获取设备信息上报的时间点
+	 * @return
+	 */
+	public long getDeviceTime() {
+		return mSharedPref.getLong(DEVICE_TIME_LINE, DEVICE_TIME_LINE_DEFAULT);
+	}
+	
+	/**
+	 * 设置设备信息上报的时间点
+	 * 
+	 * @param time
+	 */
+	public void setDeviceTime(long time) {
+		setValue(DEVICE_TIME_LINE, time);
+	}
+	
+	private void setValue(String key, long value) {
+		mEditor.putLong(key, value);
+		mEditor.commit();
+	}
+	
+	private void setValue(String key, String value) {
+		mEditor.putString(key, value);
 		mEditor.commit();
 	}
 }

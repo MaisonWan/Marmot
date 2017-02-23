@@ -21,6 +21,8 @@ import com.domker.marmot.net.WatcherRequest;
  * @date 2017年1月4日 下午7:15:12
  */
 public final class DeviceManager {
+	public static final int DEFAULT_DELAY_TIME = 60 * 60 * 1000;
+	
 	private Context mContext = null;
 	private ConfigManager mConfigManager = null;
 	private DeviceUtils mDeviceInfo = null;
@@ -37,7 +39,10 @@ public final class DeviceManager {
 	public void checkList() {
 		if (checkUid()) {
 			// 注册设备信息
-			deviceRegister();
+			long d = System.currentTimeMillis() - mConfigManager.getDeviceTime();
+			if (d >= DEFAULT_DELAY_TIME) {
+				deviceRegister();
+			}
 		}
 	}
 	
@@ -63,8 +68,11 @@ public final class DeviceManager {
 		Listener<ResponseResult> listener = new Listener<ResponseResult>() {
 
 			@Override
-			public void onResponse(ResponseResult context) {
-				MLog.i("onResponse", context.toString());
+			public void onResponse(ResponseResult result) {
+				MLog.i("onResponse", result.toString());
+				if (result.isSucceed()) {
+					mConfigManager.setDeviceTime(System.currentTimeMillis());
+				}
 			}
 		};
 		WatcherRequest request = WatcherRequest.create(Urls.DEVICE_REGISTER, r, listener);
