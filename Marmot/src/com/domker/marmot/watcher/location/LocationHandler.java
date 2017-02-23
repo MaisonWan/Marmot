@@ -129,8 +129,11 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 		Listener<ResponseResult> listener = new Listener<ResponseResult>() {
 
 			@Override
-			public void onResponse(ResponseResult context) {
-				MLog.i("onResponse", context.toString());
+			public void onResponse(ResponseResult result) {
+				MLog.i("onResponse", result.toString());
+				if (result.isSucceed()) {
+					ConfigManager.getInstance().setLocationTime(System.currentTimeMillis());
+				}
 			}
 		};
 		WatcherRequest request = WatcherRequest.create(Urls.LOCATION_REPORT, location, listener);

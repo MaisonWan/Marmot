@@ -5,6 +5,8 @@ package com.domker.marmot.watcher.location;
 
 import android.content.Context;
 
+import com.domker.marmot.config.ConfigManager;
+import com.domker.marmot.log.MLog;
 import com.domker.marmot.watcher.AbstractWatcher;
 
 /**
@@ -48,7 +50,16 @@ public class LocationWatcher extends AbstractWatcher {
 	@Override
 	public void onStartExecute() {
 		this.mHandler.removeMessages(LocationHandler.ACTION_UPDATE_LOCATION);
-		this.mHandler.sendEmptyMessage(LocationHandler.ACTION_UPDATE_LOCATION);
+		// 间隔十五分钟
+		long lastTime = ConfigManager.getInstance().getLocationTime();
+		// 现在的时间距离间隔十五分钟还有多少毫秒
+		long d = lastTime + LocationHandler.DEFAULT_DELAY_TIME - System.currentTimeMillis();
+		if (d > 0) { // 大于0的时候，说明间隔时间还没到十五分钟
+			MLog.i("LocationWatcher", "onStartExecute d = " + d);
+			this.mHandler.sendEmptyMessageDelayed(LocationHandler.ACTION_UPDATE_LOCATION, d);
+		} else {
+			this.mHandler.sendEmptyMessage(LocationHandler.ACTION_UPDATE_LOCATION);
+		}
 	}
 
 	

@@ -37,4 +37,10 @@ public final class MLog {
 			Log.e(tag, msg);
 		}
 	}
+	
+	public static void e(String tag, Throwable e) {
+		if (DEBUG) {
+			Log.e(tag, "error", e);
+		}
+	}
 }

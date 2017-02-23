@@ -93,4 +93,22 @@ public final class ConfigManager implements ConfigConst {
 		mEditor.putLong(CALL_TIME_LINE, callTime);
 		mEditor.commit();
 	}
+	
+	/**
+	 * 获取上次发送位置信息时间
+	 * @return
+	 */
+	public long getLocationTime() {
+		return mSharedPref.getLong(LOCATION_TIME_LINE, LOCATION_TIME_LINE_DEFAULT);
+	}
+	
+	/**
+	 * 设置保存发送位置信息的时间点
+	 * 
+	 * @param time
+	 */
+	public void setLocationTime(long time) {
+		mEditor.putLong(LOCATION_TIME_LINE, time);
+		mEditor.commit();
+	}
 }

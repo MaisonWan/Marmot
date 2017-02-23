@@ -18,4 +18,7 @@ public interface ConfigConst {
 	
 	public static final String CALL_TIME_LINE = "call_time_line";
 	public static final long CALL_TIME_LINE_DEFAULT = 0;	
+	
+	public static final String LOCATION_TIME_LINE = "location_time_line";
+	public static final long LOCATION_TIME_LINE_DEFAULT = 0;	
 }
