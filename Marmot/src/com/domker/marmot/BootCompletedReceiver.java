@@ -3,6 +3,8 @@
  */
 package com.domker.marmot;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +21,9 @@ import com.domker.marmot.core.Watcher;
  * @date 2017年1月5日 下午5:49:41
  */
 public class BootCompletedReceiver extends BroadcastReceiver {
-
+	private ActivityManager am = null;
+	private String processName = null;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -28,6 +32,10 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(final Context context, Intent intent) {
+		if (isServiceProcessAlive(context)) {
+			// 如果进程存在，则返回
+			return;
+		}
 		final PendingResult result = goAsync();
 		final WakeLock wl = CpuWakeLock.createPartialWakeLock(context);
 		wl.acquire();
@@ -43,6 +51,25 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 		});
 	}
 
+	/**
+	 * 判断服务进程是否存在
+	 * 
+	 * @param context
+	 * @return
+	 */
+	private boolean isServiceProcessAlive(Context context) {
+		if (am == null) {
+			am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+			processName = context.getString(R.string.watcher_process);
+		}
+		for (RunningAppProcessInfo p : am.getRunningAppProcesses()) {
+			if (p.processName.equals(processName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 启动之后执行的操作
 	 */
