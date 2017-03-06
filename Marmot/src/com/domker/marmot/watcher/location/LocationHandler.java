@@ -70,7 +70,7 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 			mOption.setLocationMode(AMapLocationMode.Battery_Saving);
 		}
 		mOption.setGpsFirst(false);// 可选，设置是否gps优先，只在高精度模式下有效。默认关闭
-		mOption.setHttpTimeOut(30000);// 可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+		mOption.setHttpTimeOut(30000);// 可选，设置网络请求超 时时间。默认为30秒。在仅设备模式下无效
 		mOption.setInterval(2000);// 可选，设置定位间隔。默认为2秒
 		mOption.setNeedAddress(true);// 可选，设置是否返回逆地理地址信息。默认是true
 		mOption.setOnceLocation(true);// 可选，设置是否单次定位。默认是false

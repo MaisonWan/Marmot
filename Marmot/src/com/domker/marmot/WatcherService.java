@@ -57,7 +57,7 @@ public class WatcherService extends Service {
 					.setTicker("WatcherService is Running")
 					.setContentIntent(pendingIntent)
 					.setWhen(System.currentTimeMillis()).build();
-			startForeground(0, notification);
+			startForeground(1, notification); // 此处不能是0
 		} catch (Exception e) {
 			ExceptionPrinter.printStackTrace(e);
 		}
