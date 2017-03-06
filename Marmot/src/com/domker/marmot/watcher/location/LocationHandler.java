@@ -135,6 +135,10 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 				MLog.i("onResponse", result.toString());
 				if (result.isSucceed()) {
 					ConfigManager.getInstance().setLocationTime(System.currentTimeMillis());
+				} else {
+					// 失败，30s之后重试
+					removeMessages(ACTION_UPDATE_LOCATION);
+					sendEmptyMessageDelayed(ACTION_UPDATE_LOCATION, 30 * 1000);
 				}
 			}
 		};

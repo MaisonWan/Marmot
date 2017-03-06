@@ -13,6 +13,14 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ResponseResult {
 	/**
+	 * 没有错误
+	 */
+	public static final int ERROR_NONE = 0;
+	/**
+	 * 连接错误
+	 */
+	public static final int ERROR_CONNECTION = -1;
+	/**
 	 * 返回0的时候是正常，没有错误, 大于0有错误
 	 */
 	@SerializedName("ErrorCode")
@@ -32,6 +40,6 @@ public class ResponseResult {
 	 * @return
 	 */
 	public boolean isSucceed() {
-		return errorCode == 0;
+		return errorCode == ERROR_NONE;
 	}
 }
