@@ -27,6 +27,7 @@ public class RequestLocation {
 	private String address;
 	private String poiName;
 	private long time;
+	private String netType;
 
 	private String uid;
 
@@ -172,6 +173,14 @@ public class RequestLocation {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public String getNetType() {
+		return netType;
+	}
+
+	public void setNetType(String netType) {
+		this.netType = netType;
 	}
 
 	public static RequestLocation convert(AMapLocation location) {

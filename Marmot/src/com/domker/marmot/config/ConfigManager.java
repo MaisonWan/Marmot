@@ -43,6 +43,15 @@ public final class ConfigManager implements ConfigConst {
 	}
 	
 	/**
+	 * 返回设备唯一标识
+	 * 
+	 * @return
+	 */
+	public static String uid() {
+		return getInstance().getUid();
+	}
+	
+	/**
 	 * 获取唯一标识
 	 * @return
 	 */

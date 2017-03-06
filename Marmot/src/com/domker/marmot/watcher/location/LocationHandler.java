@@ -18,6 +18,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.android.volley.Response.Listener;
 import com.domker.marmot.config.ConfigManager;
 import com.domker.marmot.log.MLog;
+import com.domker.marmot.net.NetUtil;
 import com.domker.marmot.net.ResponseResult;
 import com.domker.marmot.net.Urls;
 import com.domker.marmot.net.WatcherNet;
@@ -124,7 +125,8 @@ public class LocationHandler extends Handler implements AMapLocationListener {
 
 	private void postRequest(AMapLocation amapLocation) {
 		RequestLocation location = RequestLocation.convert(amapLocation);
-		location.setUid(ConfigManager.getInstance().getUid());
+		location.setUid(ConfigManager.uid());
+		location.setNetType(NetUtil.getNetworkTypeName());
 		
 		Listener<ResponseResult> listener = new Listener<ResponseResult>() {
 
