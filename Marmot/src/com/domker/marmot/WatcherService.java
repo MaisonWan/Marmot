@@ -50,14 +50,14 @@ public class WatcherService extends Service {
 	 */
 	private void startForeground() {
 		try {
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), WatcherService.class);
-			PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
-			Notification notification = new Notification.Builder(this)
-					.setTicker("WatcherService is Running")
-					.setContentIntent(pendingIntent)
-					.setWhen(System.currentTimeMillis()).build();
-			startForeground(1, notification); // 此处不能是0
+//			Intent intent = new Intent();
+//			intent.setClass(getApplicationContext(), WatcherService.class);
+//			PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_NO_CREATE);
+//			Notification notification = new Notification.Builder(this)
+//					.setTicker("WatcherService is Running")
+//					.setContentIntent(pendingIntent)
+//					.setWhen(System.currentTimeMillis()).build();
+			startForeground(1, new Notification()); // 此处不能是0
 		} catch (Exception e) {
 			ExceptionPrinter.printStackTrace(e);
 		}

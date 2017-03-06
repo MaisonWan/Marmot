@@ -4,35 +4,62 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <TextView
-        android:id="@+id/textViewLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/buttonProcessInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonAppInfo"
+        android:layout_alignParentBottom="true"
+        android:text="进程信息" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonStartService"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewLog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonProcessInfo"
+        android:layout_alignParentLeft="true" >
+
+        <Button
+            android:id="@+id/buttonLogInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Log信息" />
+
+        <Button
+            android:id="@+id/buttonLogClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Log清空" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonStartService"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
         android:text="启动服务" />
 
-     <Button
-         android:id="@+id/buttonAppInfo"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/buttonStartService"
-         android:layout_below="@+id/buttonStartService"
-         android:layout_marginTop="20dp"
-         android:text="App信息" />
-     
-     <Button
-         android:id="@+id/buttonProcessInfo"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/buttonStartService"
-         android:layout_below="@+id/buttonAppInfo"
-         android:layout_marginTop="20dp"
-         android:text="进程信息" />
-	
 </RelativeLayout>
